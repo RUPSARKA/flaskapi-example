@@ -8,7 +8,12 @@ on:
 
 jobs:
   job1:
-    runs-on: windows-latest
+    env:
+      SECRET_KEY: 4b98edcce9f6097c91900547bee9845e3ac5b5b259852abd7d3d41af32910083
+      DEBUG: True
+      SQLALCHEMY_DATABASE_URI: postgresql://postgres:Sarkar#8991@localhost:5432/flaskapi
+      JWT_SECRET_KEY: 174aeb5e711b8d7632274f1520681c26bbb4
+    runs-on: [windows-latest, ubuntu-latest]
     steps:
       - name: pulling git repo
         uses: actions/checkout@v3
