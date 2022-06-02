@@ -13,7 +13,7 @@ jobs:
       DEBUG: True
       SQLALCHEMY_DATABASE_URI: postgresql://postgres:Sarkar#8991@localhost:5432/flaskapi
       JWT_SECRET_KEY: 174aeb5e711b8d7632274f1520681c26bbb4
-    runs-on: [windows-latest, ubuntu-latest]
+    runs-on: ubuntu-latest
     steps:
       - name: pulling git repo
         uses: actions/checkout@v3
