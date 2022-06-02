@@ -8,11 +8,27 @@ on:
 
 jobs:
   job1:
+    environment:
+      name: testing
     env:
-      SECRET_KEY: 4b98edcce9f6097c91900547bee9845e3ac5b5b259852abd7d3d41af32910083
+      SECRET_KEY: ${{secrets.SECRET_KEY}}
       DEBUG: True
-      SQLALCHEMY_DATABASE_URI: postgresql://postgres:Sarkar#8991@localhost:5432/flaskapi
-      JWT_SECRET_KEY: 174aeb5e711b8d7632274f1520681c26bbb4
+      SQLALCHEMY_DATABASE_URI: ${{secrets.SQLALCHEMY_DATABASE_URI}}
+      JWT_SECRET_KEY: ${{secrets.JWT_SECRET_KEY}}
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
+          POSTGRES_DB: flaskapi_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     runs-on: ubuntu-latest
     steps:
       - name: pulling git repo
